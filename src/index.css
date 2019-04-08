@@ -1,0 +1,17 @@
+/* add custom css here. */
+/* would have loved to use glamor */
+.deleteIcon,
+.editIcon {
+  transition: all 0.2s ease;
+}
+.deleteIcon:hover {
+  color: red;
+  font-size: 48px;
+  cursor: pointer;
+}
+
+.editIcon:hover {
+  color: blue;
+  font-size: 48px;
+  cursor: pointer;
+}
