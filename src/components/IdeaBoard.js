@@ -25,7 +25,7 @@ export default class IdeaBoard extends Component {
 
   addIdea = object => {
     this.setState(prevState => ({
-      displayForm: !prevState.displayForm,
+      displayForm: false,
       ideas: [object, ...this.state.ideas],
     }))
   }
@@ -36,8 +36,21 @@ export default class IdeaBoard extends Component {
     }))
   }
 
-  // will require a rewrite for the AddIdeaForm.js component to use state
-  editIdea = () => {}
+  saveIdea = (new_object, index) => {
+    // console.log(index)
+    this.setState({
+      ideas: this.state.ideas.map((val, i) => {
+        if (index === i) {
+          return { ...new_object }
+        }
+        return val
+      }),
+    })
+  }
+
+  hideForm = () => {
+    this.setState({ displayForm: false })
+  }
 
   render() {
     const { ideas, displayForm } = this.state
@@ -53,7 +66,11 @@ export default class IdeaBoard extends Component {
 
         <div className="row">
           {displayForm ? (
-            <AddIdeaForm addIdea={this.addIdea} displayForm={this.state.displayForm} />
+            <AddIdeaForm
+              addIdea={this.addIdea}
+              displayForm={this.state.displayForm}
+              hideForm={this.hideForm}
+            />
           ) : (
             ''
           )}
@@ -61,7 +78,7 @@ export default class IdeaBoard extends Component {
             <Idea
               data={element}
               deleteIdea={this.deleteIdea}
-              editIdea={this.editIdea}
+              saveIdea={this.saveIdea}
               key={index}
               index={index}
             />

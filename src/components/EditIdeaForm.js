@@ -12,35 +12,43 @@ const styles = {
   },
 }
 
-export default class AddIdeaForm extends Component {
+export default class EditIdeaForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: '',
-      body: '',
+      title: this.props.title,
+      body: this.props.body,
+      index: this.props.index,
     }
   }
+
+  //   static getDerivedStateFromProps(props, state) {
+  //     return {
+  //       title: props.title,
+  //       body: props.body,
+  //     }
+  //   }
 
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value })
   }
 
-  addIdea = e => {
+  editIdea = e => {
     e.preventDefault()
     const { title, body } = this.state
     const new_idea = { title, body }
-    this.props.addIdea(new_idea)
+    this.props.saveIdea(new_idea, this.state.index)
   }
 
   cancel = e => {
     e.preventDefault()
-    this.props.hideForm()
+    this.props.cancel()
   }
 
   render() {
     return (
       <div className="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-        <form onSubmit={this.addIdea}>
+        <form onSubmit={this.editIdea}>
           <div className="card" style={styles.divStyle}>
             <div className="card-body">
               <div className="row">
@@ -52,9 +60,9 @@ export default class AddIdeaForm extends Component {
                       id="title"
                       autoFocus={this.props.displayForm}
                       aria-describedby="title"
-                      value={this.state.title}
                       placeholder="Enter title"
                       onChange={this.onChange}
+                      defaultValue={this.state.title}
                     />
                   </div>
                 </div>
@@ -66,13 +74,13 @@ export default class AddIdeaForm extends Component {
                   id="body"
                   cols="30"
                   rows="6"
-                  value={this.state.body}
                   onChange={this.onChange}
+                  defaultValue={this.state.body}
                 />
               </div>
               <div className="row" style={styles.submitBtn}>
                 <div className="col-6 col-md-6">
-                  <input type="submit" value="Add" className="btn btn-success" />
+                  <input type="submit" value="Edit" className="btn btn-success" />
                 </div>
                 <div className="col-6 col-md-6">
                   <button className="btn btn-danger" onClick={this.cancel}>
