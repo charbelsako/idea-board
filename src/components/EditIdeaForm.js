@@ -6,6 +6,8 @@ const styles = {
     height: '300px',
     marginBottom: '20px',
     marginTop: '20px',
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
   submitBtn: {
     marginTop: '5px',
