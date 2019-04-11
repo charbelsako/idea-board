@@ -9,10 +9,13 @@ const styles = {
     height: '300px',
     marginBottom: '20px',
     marginTop: '20px',
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
   deleteIcon: {
     fontSize: '24px',
   },
+  centered: {},
 }
 // try to use bootstrap cards
 // This might have to be a stateful component for editing ideas
