@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import EditIdeaForm from './EditIdeaForm'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 const styles = {
   divStyle: {
     // border: '1px solid black',
@@ -19,6 +20,11 @@ const styles = {
 class Idea extends Component {
   state = {
     isEditing: false,
+    mounted: false,
+  }
+
+  componentDidMount() {
+    this.setState({ mounted: true })
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -44,6 +50,10 @@ class Idea extends Component {
     this.setState({
       isEditing: false,
     })
+  }
+
+  deleteIdea = () => {
+    this.props.deleteIdea(this.props.index)
   }
 
   render() {
@@ -81,7 +91,7 @@ class Idea extends Component {
                   icon="trash"
                   style={styles.deleteIcon}
                   className="deleteIcon"
-                  onClick={this.props.deleteIdea(this.props.index)}
+                  onClick={this.deleteIdea}
                 />
               </div>
             </div>

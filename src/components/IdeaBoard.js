@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Idea from './IdeaElement'
 import AddIdeaForm from './AddIdeaForm'
-
 export default class IdeaBoard extends Component {
   constructor(props) {
     super(props)
@@ -13,10 +12,16 @@ export default class IdeaBoard extends Component {
         },
       ],
       displayForm: false,
+      mounted: false,
     }
   }
 
-  deleteIdea = key => () => {
+  componentDidMount() {
+    this.setState({ mounted: true })
+  }
+
+  deleteIdea = key => {
+    console.log(key)
     this.state.ideas.splice(key, 1)
     this.setState({
       ideas: [...this.state.ideas],
@@ -74,6 +79,7 @@ export default class IdeaBoard extends Component {
           ) : (
             ''
           )}
+
           {ideas.map((element, index) => (
             <Idea
               data={element}
